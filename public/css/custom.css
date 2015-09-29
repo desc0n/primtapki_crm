@@ -1,0 +1,137 @@
+﻿/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #000;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+  padding: 60px 15px 0;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
+
+.footer > .container {
+  border-top: 1px solid #F10000;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+code {
+  font-size: 80%;
+}
+body{
+  background-color: #000;
+}
+body {
+    background: #000;
+    color: #fff;
+}
+.modal {
+  overflow: auto;
+  color: #000;
+}
+.navbar-default{
+  background-color: transparent; 
+  border: none;
+}
+.nav > li > a {
+  padding: 0;
+}
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  background-color: transparent;
+}
+.nav > li > a:hover, .nav > li > a:focus {
+  background-color: transparent; 
+}
+.header{
+  background-image: url('../i/hbg.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 268px;
+}
+.main .nav-stacked li{
+  margin-top: -1px;
+  padding-right: 2px;
+  border-right: 1px solid #F10000;
+}
+.nav-pills > li > a {
+  color: #fff;
+  font-size: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+.nav-pills > li > a > i {
+  margin-right: 5px;
+  font-weight: bold;
+}
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  font-weight: bold;
+  text-decoration: underline;
+}
+.nav-pills > li > a:hover {
+  text-decoration: underline;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+}
+.nav-pills{
+  padding: 30px 0 0 20px;
+}
+.gohome{
+  display: block;
+  width: 350px;
+  height: 130px;
+  margin-left: 110px;
+}
+body > .container,.main{
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+.description{
+  padding-bottom: 20px;
+  font-size: 18px;
+}
+h1,h2{
+  border-bottom: 1px solid #F10000;
+}
+a{
+  color: #F10000;
+}
+a:hover,a:focus,a:active{
+  color: #fff;
+}
+.hcontacts{
+  font-size: 18px;
+  font-style: italic;
+  margin-left: 140px;
+  margin-top: 70px;
+}
+.hcontacts>span{
+  font-weight: bold;
+  font-size: 22px;
+}
+.hcontacts>i{
+  margin-right: 10px;
+  font-size: 24px;
+}
+ .car{
+   margin-top: 80px;
+   margin-left: 50px;
+   width: 200px;
+ }
