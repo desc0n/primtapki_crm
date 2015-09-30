@@ -16,6 +16,7 @@ class Controller_Index extends Controller
 		$template=View::factory("template")
 			->set('get', $_GET)
 			->set('post', $_POST);
+
 		$template->content = View::factory("index");
 		$this->response->body($template);
 	}
