@@ -12,21 +12,16 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="/crm/public/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- MetisMenu CSS -->
     <link href="/crm/public/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
-
-    <!-- Timeline CSS -->
-    <link href="/crm/public/dist/css/timeline.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="/crm/public/dist/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href="/crm/public/bower_components/morrisjs/morris.css" rel="stylesheet">
-
     <!-- Custom Fonts -->
     <link href="/crm/public/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- DataTables CSS -->
+    <link href="/crm/public/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- DataTables Responsive CSS -->
+    <link href="/crm/public/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/crm/public/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -50,7 +45,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">Admin v2.0</a>
+            <a class="navbar-brand" href="/crm">Admin v2.0</a>
         </div>
         <!-- /.navbar-header -->
 
@@ -69,28 +64,28 @@
                         <!-- /input-group -->
                     </li>
                     <li>
-                        <a href="/"><i class="fa fa-dashboard fa-fw"></i> Панель управления</a>
+                        <a href="/crm"><i class="fa fa-dashboard fa-fw"></i> Панель управления</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-users fa-fw"></i> Клиенты<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/customer/list">Список</a>
+                                <a href="/crm/customer/list">Список</a>
                             </li>
                             <li>
-                                <a href="/customer/sending">Рассылка</a>
+                                <a href="/crm/customer/sending">Рассылка</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="/sales"><i class="fa fa-money fa-fw"></i> Продажи</a>
+                        <a href="/crm/sales"><i class="fa fa-money fa-fw"></i> Продажи</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-list fa-fw"></i> События<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/actions/list">Список</a>
+                                <a href="/crm/actions/list">Список</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
@@ -112,16 +107,23 @@
 
 <!-- jQuery -->
 <script src="/crm/public/bower_components/jquery/dist/jquery.min.js"></script>
-
 <!-- Bootstrap Core JavaScript -->
 <script src="/crm/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
 <!-- Metis Menu Plugin JavaScript -->
 <script src="/crm/public/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
 <!-- Custom Theme JavaScript -->
 <script src="/crm/public/dist/js/sb-admin-2.js"></script>
-
+<!-- DataTables JavaScript -->
+<script src="/crm/public/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="/crm/public/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+    });
+</script>
 </body>
 
 </html>
