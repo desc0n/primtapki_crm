@@ -18,8 +18,8 @@ return array
 			 *
 			 * Ports and sockets may be appended to the hostname.
 			 */
-			'hostname'   => 'primtapki.mysql',
-			'database'   => 'primtapki_vikamorgan',
+			'hostname'   => 'localhost',
+			'database'   => 'primtapki_balansir',
 			'username'   => 'primtapki_mysql',
 			'password'   => 'eTzH9wrw',
 			'persistent' => FALSE,

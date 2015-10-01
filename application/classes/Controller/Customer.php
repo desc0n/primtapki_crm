@@ -4,6 +4,16 @@ class Controller_Customer extends Controller
 {
 	public function action_list()
 	{
+        /**
+         * @var $adminModel Model_Admin
+         */
+        $adminModel = Model::factory('Admin');
+
+        if (Arr::get($_POST, 'name') !== null && Arr::get($_POST, 'phone') !== null) {
+            $adminModel->setCustomer($_POST);
+            HTTP::redirect('/customer/list');
+        }
+
 		$template=View::factory("template")
 			->set('get', $_GET)
 			->set('post', $_POST);

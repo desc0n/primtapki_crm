@@ -19,7 +19,7 @@
                     </div>
                 </div>
             </div>
-            <a href="/customer/list">
+            <a href="/crm/customer/list">
                 <div class="panel-footer">
                     <span class="pull-left">Перейти</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -41,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <a href="/sales">
+            <a href="/crm/sales">
                 <div class="panel-footer">
                     <span class="pull-left">Перейти</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -63,7 +63,7 @@
                     </div>
                 </div>
             </div>
-            <a href="/actions/list">
+            <a href="/crm/actions/list">
                 <div class="panel-footer">
                     <span class="pull-left">Перейти</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

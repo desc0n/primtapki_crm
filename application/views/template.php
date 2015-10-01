@@ -22,6 +22,8 @@
     <link href="/crm/public/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="/crm/public/dist/css/sb-admin-2.css" rel="stylesheet">
+    <!--Bootstrap Datepicker CSS-->
+    <link href="/crm/public/css/bootstrap-datetimepicker.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,6 +32,11 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- jQuery -->
+    <script src="/crm/public/bower_components/jquery/dist/jquery.min.js"></script>
+    <!--Bootstrap Datepicker JavaScript-->
+    <script src="/crm/public/js/moment-with-locales.js"></script>
+    <script src="/crm/public/js/bootstrap-datetimepicker.js"></script>
 </head>
 
 <body>
@@ -104,9 +111,23 @@
 
 </div>
 <!-- /#wrapper -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="errorModalLabel">Ошибка</h4>
+            </div>
+            <div class="modal-body" id="errorModalBody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /#errorModal -->
 
-<!-- jQuery -->
-<script src="/crm/public/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="/crm/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Metis Menu Plugin JavaScript -->

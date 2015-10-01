@@ -1,7 +1,5 @@
 $(function() {
-
     $('#side-menu').metisMenu();
-
 });
 
 //Loads the correct sidebar on window load,
@@ -33,4 +31,62 @@ $(function() {
     if (element.is('li')) {
         element.addClass('active');
     }
+
+    $('#newPhone').keyup(function(){
+        if ($(this).val().length != 10) {
+            $(this).parent().parent().attr('class', 'col-lg-6 has-error');
+            $('#newPhoneError').attr('class', 'control-label');
+
+            return false;
+        }
+
+        $(this).parent().parent().attr('class', 'col-lg-6');
+        $('#newPhoneError').attr('class', 'control-label hide');
+    });
+
+    $('#newName').keyup(function(){
+        $(this).parent().attr('class', 'col-lg-6');
+        $('#newNameError').attr('class', 'control-label hide');
+    });
+
+    $('#addNewCustomer').click(function(){
+        if ($('#newPhone').val().length != 10) {
+            var errorText = '<div class="alert alert-danger"><strong>Количество цифр телефона не равно 10!</strong> ' +
+                'Проверьте правильность ввода номера телефона.</div>';
+            $('#newPhone').parent().parent().attr('class', 'col-lg-6 has-error');
+            $('#newPhoneError').attr('class', 'control-label');
+            $('#errorModalBody').html(errorText);
+            $('#errorModal').modal();
+
+            return false;
+        }
+
+        if ($('#newName').val().length == 0) {
+            var errorText = '<div class="alert alert-danger"><strong>Не указано наименование!</strong> ' +
+                'Проверьте зополненность поля наименование.</div>';
+            $('#newName').parent().attr('class', 'col-lg-6 has-error');
+            $('#newNameError').attr('class', 'control-label');
+            $('#errorModalBody').html(errorText);
+            $('#errorModal').modal();
+
+            return false;
+        }
+
+        $.ajax({type: 'POST', url: '/crm/ajax/check_user_phone', async: true, data:{
+            phone: $('#newPhone').val()
+        },
+        success: function(data){
+            if (data == 1) {
+                var errorText = '<div class="alert alert-danger"><strong>Клиент с таким номером телефона есть в базе!</strong> '+
+                    'Проверьте правильность ввода номера телефона.</div>'
+                $('#errorModalBody').html(errorText);
+                $('#errorModal').modal();
+
+                return false;
+            }
+
+            addCustomerForm.submit();
+        }
+        });
+    });
 });
