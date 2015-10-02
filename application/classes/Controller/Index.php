@@ -13,11 +13,17 @@ class Controller_Index extends Controller
             HTTP::redirect('/');
         }
 
-		$template=View::factory("template")
+        /**
+         * @var $adminModel Model_Admin
+         */
+        $adminModel = Model::factory('Admin');
+
+		$template = View::factory("template")
 			->set('get', $_GET)
 			->set('post', $_POST);
 
-		$template->content = View::factory("index");
+		$template->content = View::factory("index")
+            ->set('customerList', $adminModel->findAllCustomer());
 		$this->response->body($template);
 	}
 
