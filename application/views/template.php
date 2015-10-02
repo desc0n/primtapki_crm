@@ -33,7 +33,7 @@
     <![endif]-->
 
     <!-- jQuery -->
-    <script src="/crm/public/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!--Bootstrap Datepicker JavaScript-->
     <script src="/crm/public/js/moment-with-locales.js"></script>
     <script src="/crm/public/js/bootstrap-datetimepicker.js"></script>
