@@ -59,15 +59,20 @@ class Model_Admin extends Kohana_Model
 
     public function findAllCustomer()
     {
-        return DB::query(Database::SELECT, '
+        return DB::query(Database::SELECT, "
             SELECT `cd`.*,
+            IF (`cd`.`postindex` != '', CONCAT(`cd`.`postindex`, ' '), '') as `postindex`,
+            IF (`cd`.`region` != '', CONCAT(`cd`.`region`, ' '), '') as `region`,
+            IF (`cd`.`city` != '', CONCAT('г. ', `cd`.`city`, ' '), '') as `city`,
+            IF (`cd`.`street` != '', CONCAT('ул. ', `cd`.`street`, ' '), '') as `street`,
+            IF (`cd`.`house` != '', CONCAT('д. ', `cd`.`house`, ' '), '') as `house`,
             `up`.`name` as `manager_name`
             FROM `customers__data` `cd`
             INNER JOIN `customers__list` `cl`
                 ON `cl`.`id` = `cd`.`customers_id`
             INNER JOIN `users__profile` `up`
                 ON `up`.`user_id` = `cl`.`manager_id`
-        ')
+        ")
             ->execute()
             ->as_array();
     }

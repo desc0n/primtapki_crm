@@ -31,7 +31,16 @@
                                 <td><?=$customer['id'];?></td>
                                 <td><?=$customer['manager_name'];?></td>
                                 <td><?=$customer['name'];?></td>
-                                <td></td>
+                                <td>
+                                    <?=sprintf(
+                                        '%s%s%s%s%s',
+                                        $customer['postindex'],
+                                        $customer['region'],
+                                        $customer['city'],
+                                        $customer['street'],
+                                        $customer['house']
+                                    );?>
+                                </td>
                             </tr>
                             <?}?>
                         </tbody>
