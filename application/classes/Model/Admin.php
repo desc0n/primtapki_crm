@@ -56,5 +56,20 @@ class Model_Admin extends Kohana_Model
             ->param(':date', date('Y-m-d', strtotime($params['date'])))
             ->execute();
     }
+
+    public function findAllCustomer()
+    {
+        return DB::query(Database::SELECT, '
+            SELECT `cd`.*,
+            `up`.`name` as `manager_name`
+            FROM `customers__data` `cd`
+            INNER JOIN `customers__list` `cl`
+                ON `cl`.`id` = `cd`.`customers_id`
+            INNER JOIN `users__profile` `up`
+                ON `up`.`user_id` = `cl`.`manager_id`
+        ')
+            ->execute()
+            ->as_array();
+    }
 }
 ?>

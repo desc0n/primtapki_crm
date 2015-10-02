@@ -14,17 +14,18 @@ class Controller_Customer extends Controller
             HTTP::redirect('/customer/list');
         }
 
-		$template=View::factory("template")
+		$template = View::factory("template")
 			->set('get', $_GET)
 			->set('post', $_POST);
 
-		$template->content = View::factory("customer_list");
+		$template->content = View::factory("customer_list")
+            ->set('customerList', $adminModel->findAllCustomer());
 		$this->response->body($template);
 	}
 
     public function action_sending()
 	{
-        $template=View::factory("template")
+        $template = View::factory("template")
             ->set('get', $_GET)
             ->set('post', $_POST);
 
