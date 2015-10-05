@@ -76,5 +76,18 @@ class Model_Admin extends Kohana_Model
             ->execute()
             ->as_array();
     }
+
+    public function findCustomer($id)
+    {
+        $customers = $this->findAllCustomer();
+
+        foreach ($customers as $customer) {
+            if ($customer['customers_id'] == $id) {
+                return $customer;
+            }
+        }
+
+        return [];
+    }
 }
 ?>

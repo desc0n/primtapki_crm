@@ -19,18 +19,18 @@
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                         <tr>
-                            <th>№</th>
                             <th>Куратор</th>
                             <th>Название</th>
+                            <th>Телефон</th>
                             <th>Адрес</th>
                         </tr>
                         </thead>
                         <tbody>
                             <?foreach ($customerList as $customer) {?>
-                            <tr class="gradeA">
-                                <td><?=$customer['id'];?></td>
+                            <tr class="gradeA cursor-pointer" onclick="javascript: document.location = '/crm/customer/info/<?=$customer['customers_id'];?>'">
                                 <td><?=$customer['manager_name'];?></td>
                                 <td><?=$customer['name'];?></td>
+                                <td>+7<?=$customer['phone'];?></td>
                                 <td>
                                     <?=sprintf(
                                         '%s%s%s%s%s',

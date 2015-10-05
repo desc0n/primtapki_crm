@@ -356,3 +356,7 @@ table.dataTable thead .sorting:after {
 #addCustomerForm .form-group {
     min-height: 60px;
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}
