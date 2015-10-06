@@ -98,5 +98,13 @@ class Model_Admin extends Kohana_Model
 
         return [];
     }
+
+    public function addAction($params = [])
+    {
+        DB::query(Database::INSERT, 'INSERT INTO `customers__actions_list` (`manager_id`, `text`, `date`) VALUES (:manager_id, :text, now())')
+            ->param(':manager_id', $this->user_id)
+            ->param(':text', preg_replace('/\'\"/', '', Arr::get($params, 'newActionText')))
+            ->execute();
+    }
 }
 ?>

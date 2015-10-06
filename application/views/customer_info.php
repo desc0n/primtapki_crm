@@ -59,8 +59,27 @@
                 <!-- /.panel -->
             </div>
             <div class="tab-pane fade" id="actions">
-                <h4>Profile Tab</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <button class="btn btn-default" data-toggle="modal" data-target="#addActionModal">Добавить событие <i class="fa fa-plus fa-fw"></i></button>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Список событий
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Добавил</th>
+                                        <th>Дата добавления</th>
+                                        <th>Описание события</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade" id="sales">
                 <h4>Settings Tab</h4>
@@ -147,6 +166,29 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                 <button type="button" class="btn btn-primary" id="redactNewCustomer">Сохранить изменения</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="addActionModal" tabindex="-1" role="dialog" aria-labelledby="addActionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="addActionModalLabel">Добавление события</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" method="post" id="addActionForm">
+                    <div class="form-group">
+                        <label for="newActionText">Описание события</label>
+                        <textarea class="form-control" id="newActionText" name="newActionText" rows="5"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary" onclick="addActionForm.submit();">Сохранить изменения</button>
             </div>
         </div>
     </div>
