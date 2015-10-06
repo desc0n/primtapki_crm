@@ -76,6 +76,15 @@
                                         <th>Описание события</th>
                                     </tr>
                                 </thead>
+                                <tbody>
+                                    <?foreach ($customerActions as $action) {?>
+                                    <tr>
+                                        <td><?=$action['manager_name'];?></td>
+                                        <td><?=date('H:i d.m.Y', strtotime($action['date']));?></td>
+                                        <td><?=$action['text'];?></td>
+                                    </tr>
+                                    <?}?>
+                                </tbody>
                             </table>
                         </div>
                     </div>

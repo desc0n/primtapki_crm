@@ -101,10 +101,47 @@ class Model_Admin extends Kohana_Model
 
     public function addAction($params = [])
     {
-        DB::query(Database::INSERT, 'INSERT INTO `customers__actions_list` (`manager_id`, `text`, `date`) VALUES (:manager_id, :text, now())')
+        DB::query(Database::INSERT, 'INSERT INTO `customers__actions_list`
+                (`manager_id`, `customer_id`, `text`, `date`)
+            VALUES (:manager_id, :customer_id, :text, now())')
             ->param(':manager_id', $this->user_id)
-            ->param(':text', preg_replace('/\'\"/', '', Arr::get($params, 'newActionText')))
+            ->param(':customer_id', Arr::get($params, 'customer_id'))
+            ->param(':text', preg_replace('/[\'\"]+/', '', Arr::get($params, 'newActionText')))
             ->execute();
     }
+
+    public function findAllActions()
+    {
+        return DB::query(Database::SELECT, "
+            SELECT `cal`.*,
+            `up`.`name` as `manager_name`
+            FROM `customers__actions_list` `cal`
+            INNER JOIN `users__profile` `up`
+                ON `up`.`user_id` = `cal`.`manager_id`
+        ")
+            ->execute()
+            ->as_array();
+    }
+
+
+    public function findActionBy($params = [])
+    {
+        $where = '';
+
+        if (Arr::get($params, 'customer_id') !== null) {
+            $where .= sprintf('AND `cal`.`customer_id` = %s', preg_replace('/[^0-9]+/i', '', Arr::get($params, 'customer_id')));
+        }
+
+        return DB::query(Database::SELECT, sprintf('
+            SELECT `cal`.*,
+            `up`.`name` as `manager_name`
+            FROM `customers__actions_list` `cal`
+            INNER JOIN `users__profile` `up`
+                ON `up`.`user_id` = `cal`.`manager_id` WHERE 1 %s
+            ', $where))
+                ->execute()
+                ->as_array();
+    }
+
 }
 ?>
