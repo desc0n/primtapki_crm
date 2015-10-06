@@ -34,11 +34,11 @@
                                 <td>
                                     <?=sprintf(
                                         '%s%s%s%s%s',
-                                        $customer['postindex'],
-                                        $customer['region'],
-                                        $customer['city'],
-                                        $customer['street'],
-                                        $customer['house']
+                                        $customer['listview_postindex'],
+                                        $customer['listview_region'],
+                                        $customer['listview_city'],
+                                        $customer['listview_street'],
+                                        $customer['listview_house']
                                     );?>
                                 </td>
                             </tr>

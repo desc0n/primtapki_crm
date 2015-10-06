@@ -17,7 +17,7 @@ class Controller_Customer extends Controller
         $adminModel = Model::factory('Admin');
 
         if (Arr::get($_POST, 'name') !== null && Arr::get($_POST, 'phone') !== null) {
-            $adminModel->setCustomer($_POST);
+            $adminModel->addCustomer($_POST);
             HTTP::redirect('/customer/list');
         }
 
@@ -43,8 +43,14 @@ class Controller_Customer extends Controller
          */
         $adminModel = Model::factory('Admin');
 
-        $template = $this->getBaseTemplate();
         $id = $this->request->param('id');
+
+        if (Arr::get($_POST, 'name') !== null && Arr::get($_POST, 'phone') !== null) {
+            $adminModel->setCustomer($id, $_POST);
+            HTTP::redirect(sprintf('/customer/info/%d', $id));
+        }
+
+        $template = $this->getBaseTemplate();
 
         $template->content = View::factory("customer_info")
             ->set('customerData', $adminModel->findCustomer($id));

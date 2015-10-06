@@ -353,7 +353,8 @@ table.dataTable thead .sorting:after {
     color: #df8a13;
 }
 
-#addCustomerForm .form-group {
+#addCustomerForm .form-group,
+#redactCustomerForm .form-group {
     min-height: 60px;
 }
 

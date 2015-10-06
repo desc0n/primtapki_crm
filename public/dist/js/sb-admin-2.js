@@ -89,4 +89,18 @@ $(function() {
         }
         });
     });
+    $('#redactNewCustomer').click(function(){
+        if ($('#redactName').val().length == 0) {
+            var errorText = '<div class="alert alert-danger"><strong>Не указано наименование!</strong> ' +
+                'Проверьте зополненность поля наименование.</div>';
+            $('#redactName').parent().attr('class', 'col-lg-6 has-error');
+            $('#redactNameError').attr('class', 'control-label');
+            $('#errorModalBody').html(errorText);
+            $('#errorModal').modal();
+
+            return false;
+        }
+
+        redactCustomerForm.submit();
+    });
 });
