@@ -51,6 +51,7 @@ class Controller_Customer extends Controller
         }
 
         if (Arr::get($_POST, 'newActionText') !== null) {
+            $_POST['customer_id'] = $id;
             $adminModel->addAction($_POST);
             HTTP::redirect(sprintf('/customer/info/%d', $id));
         }
@@ -58,7 +59,8 @@ class Controller_Customer extends Controller
         $template = $this->getBaseTemplate();
 
         $template->content = View::factory("customer_info")
-            ->set('customerData', $adminModel->findCustomer($id));
+            ->set('customerData', $adminModel->findCustomer($id))
+            ->set('customerActions', $adminModel->findActionBy(['customer_id' => $id]));
         $this->response->body($template);
     }
 }
