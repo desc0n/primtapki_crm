@@ -6,42 +6,67 @@
 </div>
 <div class="row">
     <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Основные данные
-                <a href="#" class="pull-right" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil fa-fw"></i></a>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#data" data-toggle="tab">Данные</a>
+            </li>
+            <li><a href="#actions" data-toggle="tab">События</a>
+            </li>
+            <li><a href="#sales" data-toggle="tab">Продажи</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="data">
+                <div class="panel-body">
+                    <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Основные данные
+                        <a href="#" class="pull-right" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil fa-fw"></i></a>
+                    </div>
+                    <div class="panel-body">
+                        <h4>Название</h4>
+                        <p><?=Arr::get($customerData, 'name');?></p>
+                        <h4>Контактная информация</h4>
+                        <address>
+                            <p>
+                                <strong>
+                                    <?=Arr::get($customerData, 'listview_postindex');?>
+                                    <?=Arr::get($customerData, 'listview_region');?>
+                                    <?=Arr::get($customerData, 'listview_city');?>
+                                    <?=Arr::get($customerData, 'listview_street');?>
+                                    <?=Arr::get($customerData, 'listview_house');?>
+                                </strong>
+                                <br>
+                            </p>
+                            <abbr>Телефон:</abbr> +7 (<?=substr(Arr::get($customerData, 'phone'), 0, 3);?>) <?=substr(Arr::get($customerData, 'phone'), 3);?>
+                        </address>
+                        <h4>Интернет-контакты</h4>
+                        <address>
+                            <strong>Сайт</strong>
+                            <br>
+                            <a href="<?=Arr::get($customerData, 'site');?>"><?=Arr::get($customerData, 'site');?></a>
+                            <br>
+                            <strong>E-mail</strong>
+                            <br>
+                            <a href="mailto:<?=Arr::get($customerData, 'email');?>"><?=Arr::get($customerData, 'email');?></a>
+                        </address>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                </div>
+                <!-- /.panel -->
             </div>
-            <div class="panel-body">
-                <h4>Название</h4>
-                <p><?=Arr::get($customerData, 'name');?></p>
-                <h4>Контактная информация</h4>
-                <address>
-                    <p>
-                    <strong>
-                        <?=Arr::get($customerData, 'listview_postindex');?>
-                        <?=Arr::get($customerData, 'listview_region');?>
-                        <?=Arr::get($customerData, 'listview_city');?>
-                        <?=Arr::get($customerData, 'listview_street');?>
-                        <?=Arr::get($customerData, 'listview_house');?>
-                    </strong>
-                    <br>
-                    </p>
-                    <abbr>Телефон:</abbr> +7 (<?=substr(Arr::get($customerData, 'phone'), 0, 3);?>) <?=substr(Arr::get($customerData, 'phone'), 3);?>
-                </address>
-                <h4>Интернет-контакты</h4>
-                <address>
-                    <strong>Сайт</strong>
-                    <br>
-                    <a href="<?=Arr::get($customerData, 'site');?>"><?=Arr::get($customerData, 'site');?></a>
-                    <br>
-                    <strong>E-mail</strong>
-                    <br>
-                    <a href="mailto:<?=Arr::get($customerData, 'email');?>"><?=Arr::get($customerData, 'email');?></a>
-                </address>
+            <div class="tab-pane fade" id="actions">
+                <h4>Profile Tab</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </div>
-            <!-- /.panel-body -->
+            <div class="tab-pane fade" id="sales">
+                <h4>Settings Tab</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
         </div>
-        <!-- /.panel -->
     </div>
     <!-- /.col-lg-12 -->
 </div>
