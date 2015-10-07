@@ -361,3 +361,8 @@ table.dataTable thead .sorting:after {
 .cursor-pointer {
     cursor: pointer;
 }
+
+. actions-table tr th,
+. actions-table tr td {
+    vertical-align: middle;
+}
