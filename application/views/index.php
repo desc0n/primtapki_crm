@@ -29,19 +29,19 @@
         </div>
     </div>
     <div class="col-lg-3 col-md-6">
-        <div class="panel panel-green">
+        <div class="panel panel-yellow">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-money fa-5x"></i>
+                        <i class="fa fa-list fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">12</div>
-                        <div>Продажи</div>
+                        <div class="huge"><?=count($actionsList);?></div>
+                        <div>События</div>
                     </div>
                 </div>
             </div>
-            <a href="/crm/sales">
+            <a href="/crm/actions/list">
                 <div class="panel-footer">
                     <span class="pull-left">Перейти</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -51,19 +51,19 @@
         </div>
     </div>
     <div class="col-lg-3 col-md-6">
-        <div class="panel panel-yellow">
+        <div class="panel panel-green">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-list fa-5x"></i>
+                        <i class="fa fa-money fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">124</div>
-                        <div>События</div>
+                        <div class="huge">0</div>
+                        <div>Продажи</div>
                     </div>
                 </div>
             </div>
-            <a href="/crm/actions/list">
+            <a href="/crm/sales">
                 <div class="panel-footer">
                     <span class="pull-left">Перейти</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

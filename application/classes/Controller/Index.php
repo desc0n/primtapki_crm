@@ -23,7 +23,8 @@ class Controller_Index extends Controller
 			->set('post', $_POST);
 
 		$template->content = View::factory("index")
-            ->set('customerList', $adminModel->findAllCustomer());
+            ->set('customerList', $adminModel->findAllCustomer())
+            ->set('actionsList', $adminModel->findAllActions());
 		$this->response->body($template);
 	}
 
