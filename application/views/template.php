@@ -37,6 +37,8 @@
     <!--Bootstrap Datepicker JavaScript-->
     <script src="/crm/public/js/moment-with-locales.js"></script>
     <script src="/crm/public/js/bootstrap-datetimepicker.js"></script>
+    <!--Bootstrap Typeahead JavaScript-->
+    <script src="/crm/public/js/bootstrap3-typeahead.min.js"></script>
 </head>
 
 <body>

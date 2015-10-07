@@ -354,7 +354,8 @@ table.dataTable thead .sorting:after {
 }
 
 #addCustomerForm .form-group,
-#redactCustomerForm .form-group {
+#redactCustomerForm .form-group,
+#addProductModal .form-group {
     min-height: 60px;
 }
 
@@ -365,4 +366,32 @@ table.dataTable thead .sorting:after {
 . actions-table tr th,
 . actions-table tr td {
     vertical-align: middle;
+}
+
+#addProductModal .form-group .form-control {
+    display: inline-block;
+}
+
+@media (min-width: 1200px) {
+    .col-lg-9-important {
+        width: 75% !important;
+    }
+    .col-lg-8-important {
+        width: 66.66666667% !important;
+    }
+    .col-lg-7-important {
+        width: 58.33333333% !important;
+    }
+    .col-lg-6-important {
+        width: 50% !important;
+    }
+    .col-lg-5-important {
+        width: 41.66666667% !important;
+    }
+    .col-lg-4-important {
+        width: 33.33333333% !important;
+    }
+    .col-lg-3-important {
+        width: 25% !important;
+    }
 }

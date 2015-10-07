@@ -12,6 +12,8 @@
             </li>
             <li><a href="#actions" data-toggle="tab">События</a>
             </li>
+            <li><a href="#products" data-toggle="tab">Товары</a>
+            </li>
             <li><a href="#sales" data-toggle="tab">Продажи</a>
             </li>
         </ul>
@@ -84,6 +86,32 @@
                                         <td><?=$action['text'];?></td>
                                     </tr>
                                     <?}?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="products">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <button class="btn btn-default" data-toggle="modal" data-target="#addProductModal">Добавить товар <i class="fa fa-plus fa-fw"></i></button>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Список отслеживаемых товаров
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                <tr>
+                                    <th>Добавил</th>
+                                    <th>Код товара</th>
+                                    <th>Название товара</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
                                 </tbody>
                             </table>
                         </div>
@@ -198,6 +226,30 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                 <button type="button" class="btn btn-primary" onclick="addActionForm.submit();">Сохранить изменения</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="addProductModalLabel">Добавление отслеживаемого товара</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" method="post" id="addProductForm">
+                    <div class="form-group">
+                        <label for="newProductCode">Товар</label>
+                        <input class="col-lg-3-important form-control" id="newProductCode" name="newProductCode" placeholder="Код товара">
+                        <input class="col-lg-7-important form-control" id="newProductName" name="newProductName" placeholder="Название товара">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary" onclick="addProductForm.submit();">Сохранить изменения</button>
             </div>
         </div>
     </div>
