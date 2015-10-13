@@ -105,7 +105,6 @@ $(function() {
         redactCustomerForm.submit();
     });
 
-    var $input = $('#newProductCode');
     $('#newProductCode').typeahead({
         source: function (item, process) {
             return $.get('/crm/ajax/find_all_product', {
@@ -122,13 +121,14 @@ $(function() {
             });
         },
         highlighter: function (item) {
-            var parts = item.split('#'),
-                html = '<div class="typeahead">';
-            html += '<div class="pull-left margin-small">';
-            html += '<div class="text-left"><strong>' + parts[0] + '</strong></div>';
-            html += '</div>';
-            html += '<div class="clearfix"></div>';
-            html += '</div>';
+            var parts = item.split('#');
+            var html = '<div class="typeahead">' +
+                '<div class="pull-left margin-small">' +
+                '<div class="text-left"><strong>' + parts[0] + '</strong></div>' +
+                '</div>' +
+                '<div class="clearfix"></div>' +
+                '</div>';
+
             return html;
         },
         updater: function (item) {

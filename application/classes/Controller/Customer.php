@@ -56,6 +56,12 @@ class Controller_Customer extends Controller
             HTTP::redirect(sprintf('/customer/info/%d', $id));
         }
 
+        if (Arr::get($_POST, 'newProductCode') !== null) {
+            $_POST['customer_id'] = $id;
+            $adminModel->addCustomerProduct($_POST);
+            HTTP::redirect(sprintf('/customer/info/%d', $id));
+        }
+
         $template = $this->getBaseTemplate();
 
         $template->content = View::factory("customer_info")

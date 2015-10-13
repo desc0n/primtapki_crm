@@ -242,7 +242,7 @@
                 <form role="form" method="post" id="addProductForm">
                     <div class="form-group">
                         <label for="newProductCode">Товар</label>
-                        <input class="col-lg-3-important form-control" id="newProductCode" name="newProductCode" placeholder="Код товара">
+                        <input class="col-lg-3-important form-control" id="newProductCode" name="newProductCode" placeholder="Код товара" autocomplete="off">
                         <input class="col-lg-7-important form-control" id="newProductName" name="newProductName" placeholder="Название товара">
                     </div>
                 </form>

@@ -251,5 +251,17 @@ class Model_Admin extends Kohana_Model
             ->execute()
             ->as_array();
     }
+
+    public function addCustomerProduct($params = [])
+    {
+        DB::query(Database::INSERT, 'INSERT INTO `customers__products`
+                (`manager_id`, `customer_id`, `product_code`, `product_name`, `date`)
+            VALUES (:manager_id, :customer_id, :product_code, :product_name, now())')
+            ->param(':manager_id', $this->user_id)
+            ->param(':customer_id', Arr::get($params, 'customer_id'))
+            ->param(':product_code', preg_replace('/[\'\"]+/', '', Arr::get($params, 'newProductCode')))
+            ->param(':product_name', preg_replace('/[\'\"]+/', '', Arr::get($params, 'newProductName')))
+            ->execute();
+    }
 }
 ?>
