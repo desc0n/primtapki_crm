@@ -106,21 +106,36 @@ $(function() {
     });
 
     var $input = $('#newProductCode');
-    $input.typeahead({source:[{id: "someId1", name: "Display name 1"},
-        {id: "someId2", name: "Display name 2"}],
-        autoSelect: true});
-    $input.change(function() {
-        var current = $input.typeahead("getActive");
-        if (current) {
-            // Some item from your model is active!
-            if (current.name == $input.val()) {
-                // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
-            } else {
-                // This means it is only a partial match, you can either add a new item
-                // or take the active if you don't want new items
-            }
-        } else {
-            // Nothing is active so it is a new value (or maybe empty value)
+    $('#newProductCode').typeahead({
+        source: function (item, process) {
+            return $.get('/crm/ajax/find_all_product', {
+                item: item
+            }, function (response) {
+                var data = [];
+                var parseResponse = JSON.parse(response);
+
+                for (var i in parseResponse) {
+                    data.push(parseResponse[i].item_id + '#' + parseResponse[i].full_size + ' ' + parseResponse[i].model);
+                }
+
+                return process(data);
+            });
+        },
+        highlighter: function (item) {
+            var parts = item.split('#'),
+                html = '<div class="typeahead">';
+            html += '<div class="pull-left margin-small">';
+            html += '<div class="text-left"><strong>' + parts[0] + '</strong></div>';
+            html += '</div>';
+            html += '<div class="clearfix"></div>';
+            html += '</div>';
+            return html;
+        },
+        updater: function (item) {
+            var parts = item.split('#');
+            $('#newProductName').val(parts[1]);
+
+            return parts[0];
         }
     });
 });

@@ -143,5 +143,113 @@ class Model_Admin extends Kohana_Model
                 ->as_array();
     }
 
+    public function findProductByItem($item)
+    {
+        return DB::query(Database::SELECT, "
+            select `ia`.`value` as `availibility`,
+            `iab`.`value` as `about`,
+            `icm`.`value` as `catalog_manufacturer`,
+            `icat`.`value` as `category_id`,
+            `icapacity`.`value` as `capacity`,
+            `icharge`.`value` as `charge`,
+            `c`.`name` as `category`,
+            `iconstr`.`value` as `construction`,
+            `ic`.`value` as `country`,
+            `icompl`.`value` as `complect`,
+            `icont`.`value` as `contact`,
+            `id`.`value` as `diameter`,
+            `idel`.`num` as `delivery_num`,
+            `idel`.`cities` as `delivery_cities`,
+            `idesc`.`value` as `discription`,
+            `ifs`.`value` as `full_size`,
+            `ii`.`item_id`,
+            `iimg`.`img_1`,
+            `iimg`.`img_2`,
+            `iimg`.`img_3`,
+            `iimg`.`img_4`,
+            `iimg`.`img_5`,
+            `iimg`.`img_6`,
+            `il`.`value` as `link`,
+            `ih`.`value` as `height`,
+            `im`.`value` as `manufacturer`,
+            `imod`.`value` as `model`,
+            `ip`.`value` as `price`,
+            `ipost`.`autor` as `post_autor`,
+            `ipost`.`text` as `post_text`,
+            `iseas`.`value` as `season`,
+            `is`.`value` as `size`,
+            `isp`.`value` as `speed`,
+            `it`.`value` as `type`,
+            `ititle`.`value` as `title`,
+            `iu`.`value` as `usability`,
+            `iweight`.`value` as `weight`,
+            `iw`.`value` as `width`
+            from `primtapki_vikamorgan`.`items_id` `ii`
+            left join `primtapki_vikamorgan`.`items_about` `iab`
+                on `iab`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_availability` `ia`
+                on `ia`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_catalog_manufacturer` `icm`
+                on `icm`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_category` `icat`
+                on `icat`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_contact` `icont`
+                on `icont`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`categories` `c`
+                on `c`.`id` = `icat`.`value`
+            left join `primtapki_vikamorgan`.`items_construction` `iconstr`
+                on `iconstr`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_complect` `icompl`
+                on `icompl`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_capacity` `icapacity`
+                on `icapacity`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_charge` `icharge`
+                on `icharge`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_country` `ic`
+                on `ic`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_diameter` `id`
+                on `id`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_delivery` `idel`
+                on `idel`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_description` `idesc`
+                on `idesc`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_full_size` `ifs`
+                on `ifs`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_imgs` `iimg`
+                on `iimg`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_manufacturer` `im`
+                on `im`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_model` `imod`
+                on `imod`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_height` `ih`
+                on `ih`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_price` `ip`
+                on `ip`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_post` `ipost`
+                on `ipost`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_season` `iseas`
+                on `iseas`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_size` `is`
+                on `is`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_type` `it`
+                on `it`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_title` `ititle`
+                on `ititle`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_link` `il`
+                on `il`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_usability` `iu`
+                on `iu`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_weight` `iweight`
+                on `iweight`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_width` `iw`
+                on `iw`.`item` = `ii`.`id`
+            left join `primtapki_vikamorgan`.`items_speed` `isp`
+                on `isp`.`item` = `ii`.`id`
+            where `ii`.`item_id` like :item
+        ")
+            ->param(':item', sprintf('%%%s%%', $item))
+            ->execute()
+            ->as_array();
+    }
 }
 ?>

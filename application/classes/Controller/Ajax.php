@@ -12,4 +12,15 @@ class Controller_Ajax extends Controller
         $check = count($adminModel->findCustomerBy($_POST));
         $this->response->body($check === 0 ? 0 : 1);
     }
+
+    public function action_find_all_product()
+    {
+        /**
+         * @var $adminModel Model_Admin
+         */
+        $adminModel = Model::factory('Admin');
+
+        $result = json_encode($adminModel->findProductByItem(Arr::get($_POST, 'item')));
+        $this->response->body($result);
+    }
 }
