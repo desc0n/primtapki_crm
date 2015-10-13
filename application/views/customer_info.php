@@ -76,6 +76,7 @@
                                         <th class="text-center">Добавил</th>
                                         <th class="text-center">Дата добавления</th>
                                         <th class="text-center">Способ связи</th>
+                                        <th class="text-center">Тип события</th>
                                         <th>Описание события</th>
                                     </tr>
                                 </thead>
@@ -85,6 +86,7 @@
                                         <td class="text-center"><?=$action['manager_name'];?></td>
                                         <td class="text-center"><?=date('H:i d.m.Y', strtotime($action['date']));?></td>
                                         <td class="text-center"><?=$action['communication_method_name'];?></td>
+                                        <td class="text-center"><?=$action['type_name'];?></td>
                                         <td><?=$action['text'];?></td>
                                     </tr>
                                     <?}?>
@@ -229,7 +231,15 @@
                         <label for="newActionCommunicationMethod">Способ связи</label>
                         <select class="form-control" id="newActionCommunicationMethod" name="newActionCommunicationMethod">
                             <?foreach ($communicationMethods as $method) {?>
-                            <option value="<?=$method['id'];?>"><?=$method['name'];?></option>
+                                <option value="<?=$method['id'];?>"><?=$method['name'];?></option>
+                            <?}?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="newActionType">Тип события</label>
+                        <select class="form-control" id="newActionType" name="newActionType">
+                            <?foreach ($actionTypes as $type) {?>
+                            <option value="<?=$type['id'];?>"><?=$type['name'];?></option>
                             <?}?>
                         </select>
                     </div>

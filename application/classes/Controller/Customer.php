@@ -4,7 +4,7 @@ class Controller_Customer extends Controller
 {
     public function getBaseTemplate()
     {
-        return View::factory("template")
+        return View::factory('template')
             ->set('get', $_GET)
             ->set('post', $_POST);
     }
@@ -23,7 +23,7 @@ class Controller_Customer extends Controller
 
 		$template = $this->getBaseTemplate();
 
-		$template->content = View::factory("customer_list")
+		$template->content = View::factory('customer_list')
             ->set('customerList', $adminModel->findAllCustomer())
             ->set('customerTypes', $adminModel->findAllCustomerTypes());
 		$this->response->body($template);
@@ -33,7 +33,7 @@ class Controller_Customer extends Controller
 	{
         $template = $this->getBaseTemplate();
 
-        $template->content = View::factory("customer_sending");
+        $template->content = View::factory('customer_sending');
         $this->response->body($template);
 	}
 
@@ -65,11 +65,12 @@ class Controller_Customer extends Controller
 
         $template = $this->getBaseTemplate();
 
-        $template->content = View::factory("customer_info")
+        $template->content = View::factory('customer_info')
             ->set('customerData', $adminModel->findCustomer($id))
             ->set('customerActions', $adminModel->findActionBy(['customer_id' => $id]))
             ->set('customerProducts', $adminModel->findProductBy(['customer_id' => $id]))
-            ->set('communicationMethods', $adminModel->findAllCommunicationMethods());
+            ->set('communicationMethods', $adminModel->findAllCommunicationMethods())
+            ->set('actionTypes', $adminModel->findAllActionTypes());
         $this->response->body($template);
     }
 }

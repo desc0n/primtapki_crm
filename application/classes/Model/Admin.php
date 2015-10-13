@@ -106,11 +106,12 @@ class Model_Admin extends Kohana_Model
     public function addAction($params = [])
     {
         DB::query(Database::INSERT, 'INSERT INTO `customers__actions_list`
-                (`manager_id`, `customer_id`, `communication_method`, `text`, `date`)
-            VALUES (:manager_id, :customer_id, :communication_method, :text, now())')
+                (`manager_id`, `customer_id`, `communication_method`, `type`, `text`, `date`)
+            VALUES (:manager_id, :customer_id, :communication_method, :type, :text, now())')
             ->param(':manager_id', $this->user_id)
             ->param(':customer_id', Arr::get($params, 'customer_id'))
             ->param(':communication_method', Arr::get($params, 'newActionCommunicationMethod'))
+            ->param(':type', Arr::get($params, 'newActionType'))
             ->param(':text', preg_replace('/[\'\"]+/', '', Arr::get($params, 'newActionText')))
             ->execute();
     }
@@ -120,12 +121,15 @@ class Model_Admin extends Kohana_Model
         return DB::query(Database::SELECT, "
             SELECT `cal`.*,
             `up`.`name` as `manager_name`,
-            `acm`.`name` as `communication_method_name`
+            `acm`.`name` as `communication_method_name`,
+            `at`.`name` as `type_name`
             FROM `customers__actions_list` `cal`
             INNER JOIN `users__profile` `up`
                 ON `up`.`user_id` = `cal`.`manager_id`
             INNER JOIN `actions__communication_method` `acm`
                 ON `acm`.`id` = `cal`.`communication_method`
+            INNER JOIN `actions__type` `at`
+                ON `at`.`id` = `cal`.`type`
         ")
             ->execute()
             ->as_array();
@@ -142,12 +146,15 @@ class Model_Admin extends Kohana_Model
         return DB::query(Database::SELECT, sprintf('
             SELECT `cal`.*,
             `up`.`name` as `manager_name`,
-            `acm`.`name` as `communication_method_name`
+            `acm`.`name` as `communication_method_name`,
+            `at`.`name` as `type_name`
             FROM `customers__actions_list` `cal`
             INNER JOIN `users__profile` `up`
                 ON `up`.`user_id` = `cal`.`manager_id`
             INNER JOIN `actions__communication_method` `acm`
                 ON `acm`.`id` = `cal`.`communication_method`
+            INNER JOIN `actions__type` `at`
+                ON `at`.`id` = `cal`.`type`
             WHERE 1 %s
             ', $where))
                 ->execute()
@@ -413,6 +420,13 @@ class Model_Admin extends Kohana_Model
     public function findAllCustomerTypes()
     {
         return DB::query(Database::SELECT, "SELECT * FROM `customers__type`")
+            ->execute()
+            ->as_array();
+    }
+
+    public function findAllActionTypes()
+    {
+        return DB::query(Database::SELECT, "SELECT * FROM `actions__type`")
             ->execute()
             ->as_array();
     }
