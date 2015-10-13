@@ -21,6 +21,7 @@
                         <tr>
                             <th>Куратор</th>
                             <th>Название</th>
+                            <th>Тип</th>
                             <th>Телефон</th>
                             <th>Адрес</th>
                         </tr>
@@ -29,6 +30,7 @@
                             <?foreach ($customerList as $customer) {?>
                             <tr class="gradeA cursor-pointer" onclick="javascript: document.location = '/crm/customer/info/<?=$customer['customers_id'];?>'">
                                 <td><?=$customer['manager_name'];?></td>
+                                <td><?=$customer['type_name'];?></td>
                                 <td><?=$customer['name'];?></td>
                                 <td>+7<?=$customer['phone'];?></td>
                                 <td>
@@ -117,12 +119,22 @@
                     </div>
                     <div class="form-group">
                         <div class="col-lg-6">
-                            <label>E-mail</label>
-                            <input class="form-control" name="email">
+                            <label for="email">E-mail</label>
+                            <input class="form-control" id="email" name="email">
                         </div>
                             <div class="col-lg-6">
                             <label>Сайт</label>
                             <input class="form-control" name="site">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label for="type">Способ связи</label>
+                            <select class="form-control" id="type" name="type">
+                                <?foreach ($customerTypes as $type) {?>
+                                    <option value="<?=$type['id'];?>"><?=$type['name'];?></option>
+                                <?}?>
+                            </select>
                         </div>
                     </div>
                 </form>

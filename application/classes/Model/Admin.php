@@ -47,11 +47,12 @@ class Model_Admin extends Kohana_Model
     public function setCustomer($customerId, $params)
     {
         DB::query(Database::INSERT, 'INSERT INTO `customers__data`
-            (`customers_id`, `name`, `postindex`, `region`, `city`, `street`, `house`, `phone`, `fax`, `email`, `site`, `date`)
-            VALUES (:customer_id, :name, :postindex, :region, :city, :street, :house, :phone, :fax, :email, :site, :date)
+            (`customers_id`, `type`, `name`, `postindex`, `region`, `city`, `street`, `house`, `phone`, `fax`, `email`, `site`, `date`)
+            VALUES (:customer_id, :type, :name, :postindex, :region, :city, :street, :house, :phone, :fax, :email, :site, :date)
             ON DUPLICATE KEY UPDATE `name` = :name, `postindex` = :postindex, `region` = :region, `city` = :city,
             `street` = :street, `house` = :house, `fax` = :fax, `site` = :site, `email` = :email')
             ->param(':customer_id', $customerId)
+            ->param(':type', Arr::get($params, 'type'))
             ->param(':name', Arr::get($params, 'name'))
             ->param(':postindex', Arr::get($params, 'postindex'))
             ->param(':region', Arr::get($params, 'region'))
@@ -75,10 +76,13 @@ class Model_Admin extends Kohana_Model
             IF (`cd`.`city` != '', CONCAT('г. ', `cd`.`city`, ' '), '') as `listview_city`,
             IF (`cd`.`street` != '', CONCAT('ул. ', `cd`.`street`, ' '), '') as `listview_street`,
             IF (`cd`.`house` != '', CONCAT('д. ', `cd`.`house`, ' '), '') as `listview_house`,
+            `ct`.`name` as `type_name`,
             `up`.`name` as `manager_name`
             FROM `customers__data` `cd`
             INNER JOIN `customers__list` `cl`
                 ON `cl`.`id` = `cd`.`customers_id`
+            INNER JOIN `customers__type` `ct`
+                ON `ct`.`id` = `cd`.`type`
             INNER JOIN `users__profile` `up`
                 ON `up`.`user_id` = `cl`.`manager_id`
         ")
@@ -402,6 +406,13 @@ class Model_Admin extends Kohana_Model
     public function findAllCommunicationMethods()
     {
         return DB::query(Database::SELECT, "SELECT * FROM `actions__communication_method`")
+            ->execute()
+            ->as_array();
+    }
+
+    public function findAllCustomerTypes()
+    {
+        return DB::query(Database::SELECT, "SELECT * FROM `customers__type`")
             ->execute()
             ->as_array();
     }

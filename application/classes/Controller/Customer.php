@@ -24,7 +24,8 @@ class Controller_Customer extends Controller
 		$template = $this->getBaseTemplate();
 
 		$template->content = View::factory("customer_list")
-            ->set('customerList', $adminModel->findAllCustomer());
+            ->set('customerList', $adminModel->findAllCustomer())
+            ->set('customerTypes', $adminModel->findAllCustomerTypes());
 		$this->response->body($template);
 	}
 
