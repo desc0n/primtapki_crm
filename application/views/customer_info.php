@@ -73,8 +73,9 @@
                             <table class="table table-striped table-bordered table-hover  actions-table">
                                 <thead>
                                     <tr>
-                                        <th>Добавил</th>
-                                        <th>Дата добавления</th>
+                                        <th class="text-center">Добавил</th>
+                                        <th class="text-center">Дата добавления</th>
+                                        <th class="text-center">Способ связи</th>
                                         <th>Описание события</th>
                                     </tr>
                                 </thead>
@@ -83,6 +84,7 @@
                                     <tr>
                                         <td class="text-center"><?=$action['manager_name'];?></td>
                                         <td class="text-center"><?=date('H:i d.m.Y', strtotime($action['date']));?></td>
+                                        <td class="text-center"><?=$action['communication_method_name'];?></td>
                                         <td><?=$action['text'];?></td>
                                     </tr>
                                     <?}?>
@@ -223,6 +225,14 @@
             </div>
             <div class="modal-body">
                 <form role="form" method="post" id="addActionForm">
+                    <div class="form-group">
+                        <label for="newActionCommunicationMethod">Способ связи</label>
+                        <select class="form-control" id="newActionCommunicationMethod" name="newActionCommunicationMethod">
+                            <?foreach ($communicationMethods as $method) {?>
+                            <option value="<?=$method['id'];?>"><?=$method['name'];?></option>
+                            <?}?>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="newActionText">Описание события</label>
                         <textarea class="form-control" id="newActionText" name="newActionText" rows="5"></textarea>

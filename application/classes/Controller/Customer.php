@@ -67,7 +67,8 @@ class Controller_Customer extends Controller
         $template->content = View::factory("customer_info")
             ->set('customerData', $adminModel->findCustomer($id))
             ->set('customerActions', $adminModel->findActionBy(['customer_id' => $id]))
-            ->set('customerProducts', $adminModel->findProductBy(['customer_id' => $id]));
+            ->set('customerProducts', $adminModel->findProductBy(['customer_id' => $id]))
+            ->set('communicationMethods', $adminModel->findAllCommunicationMethods());
         $this->response->body($template);
     }
 }

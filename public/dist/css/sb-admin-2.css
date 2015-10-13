@@ -363,9 +363,9 @@ table.dataTable thead .sorting:after {
     cursor: pointer;
 }
 
-. actions-table tr th,
-. actions-table tr td {
-    vertical-align: middle;
+.actions-table tr th,
+.actions-table tr td {
+    vertical-align: middle !important;
 }
 
 #addProductModal .form-group .form-control {
