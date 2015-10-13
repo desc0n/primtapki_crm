@@ -107,7 +107,7 @@ $(function() {
 
     $('#newProductCode').typeahead({
         source: function (item, process) {
-            return $.get('/crm/ajax/find_all_product', {
+            return $.get('/crm/ajax/find_product_by_item', {
                 item: item
             }, function (response) {
                 var data = [];
@@ -136,6 +136,40 @@ $(function() {
             $('#newProductName').val(parts[1]);
 
             return parts[0];
+        }
+    });
+
+    $('#newProductName').typeahead({
+        source: function (name, process) {
+            return $.get('/crm/ajax/find_product_by_name', {
+                name: name
+            }, function (response) {
+                var data = [];
+                var parseResponse = JSON.parse(response);
+
+                for (var i in parseResponse) {
+                    data.push(parseResponse[i].item_id + '#' + parseResponse[i].full_size + ' ' + parseResponse[i].model);
+                }
+
+                return process(data);
+            });
+        },
+        highlighter: function (name) {
+            var parts = name.split('#');
+            var html = '<div class="typeahead">' +
+                '<div class="pull-left margin-small">' +
+                '<div class="text-left"><strong>' + parts[1] + '</strong></div>' +
+                '</div>' +
+                '<div class="clearfix"></div>' +
+                '</div>';
+
+            return html;
+        },
+        updater: function (name) {
+            var parts = name.split('#');
+            $('#newProductCode').val(parts[0]);
+
+            return parts[1];
         }
     });
 });
