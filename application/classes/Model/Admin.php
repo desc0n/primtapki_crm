@@ -123,7 +123,6 @@ class Model_Admin extends Kohana_Model
             ->as_array();
     }
 
-
     public function findActionBy($params = [])
     {
         $where = '';
@@ -262,6 +261,25 @@ class Model_Admin extends Kohana_Model
             ->param(':product_code', preg_replace('/[\'\"]+/', '', Arr::get($params, 'newProductCode')))
             ->param(':product_name', preg_replace('/[\'\"]+/', '', Arr::get($params, 'newProductName')))
             ->execute();
+    }
+
+    public function findProductBy($params = [])
+    {
+        $where = '';
+
+        if (Arr::get($params, 'customer_id') !== null) {
+            $where .= sprintf('AND `cp`.`customer_id` = %s', preg_replace('/[^0-9]+/i', '', Arr::get($params, 'customer_id')));
+        }
+
+        return DB::query(Database::SELECT, sprintf('
+            SELECT `cp`.*,
+            `up`.`name` as `manager_name`
+            FROM `customers__products` `cp`
+            INNER JOIN `users__profile` `up`
+                ON `up`.`user_id` = `cp`.`manager_id` WHERE 1 %s
+            ', $where))
+            ->execute()
+            ->as_array();
     }
 }
 ?>

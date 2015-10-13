@@ -111,7 +111,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
+                                <?foreach ($customerProducts as $product) {?>
+                                    <tr>
+                                        <td class="text-center"><?=$product['manager_name'];?></td>
+                                        <td class="text-center"><?=$product['product_code'];?></td>
+                                        <td><?=$product['product_name'];?></td>
+                                    </tr>
+                                <?}?>
                                 </tbody>
                             </table>
                         </div>
