@@ -130,6 +130,7 @@ class Model_Admin extends Kohana_Model
                 ON `acm`.`id` = `cal`.`communication_method`
             INNER JOIN `actions__type` `at`
                 ON `at`.`id` = `cal`.`type`
+            ORDER BY `cal`.`date` DESC
         ")
             ->execute()
             ->as_array();
@@ -156,6 +157,7 @@ class Model_Admin extends Kohana_Model
             INNER JOIN `actions__type` `at`
                 ON `at`.`id` = `cal`.`type`
             WHERE 1 %s
+            ORDER BY `cal`.`date` DESC
             ', $where))
                 ->execute()
                 ->as_array();
@@ -404,7 +406,9 @@ class Model_Admin extends Kohana_Model
             `up`.`name` as `manager_name`
             FROM `customers__products` `cp`
             INNER JOIN `users__profile` `up`
-                ON `up`.`user_id` = `cp`.`manager_id` WHERE 1 %s
+                ON `up`.`user_id` = `cp`.`manager_id`
+            WHERE 1 %s
+            ORDER BY `cp`.`date` DESC
             ', $where))
             ->execute()
             ->as_array();
@@ -429,6 +433,79 @@ class Model_Admin extends Kohana_Model
         return DB::query(Database::SELECT, "SELECT * FROM `actions__type`")
             ->execute()
             ->as_array();
+    }
+
+    public function findAllSaleDeliveries()
+    {
+        return DB::query(Database::SELECT, "SELECT * FROM `sales__delivery`")
+            ->execute()
+            ->as_array();
+    }
+
+    public function findAllSaleDeliveryStatuses()
+    {
+        return DB::query(Database::SELECT, "SELECT * FROM `sales__delivery_status`")
+            ->execute()
+            ->as_array();
+    }
+
+    public function findAllSaleMethods()
+    {
+        return DB::query(Database::SELECT, "SELECT * FROM `sales__method`")
+            ->execute()
+            ->as_array();
+    }
+
+    public function findAllSaleReserves()
+    {
+        return DB::query(Database::SELECT, "SELECT * FROM `sales__reserve`")
+            ->execute()
+            ->as_array();
+    }
+
+    public function findAllSaleStatuses()
+    {
+        return DB::query(Database::SELECT, "SELECT * FROM `sales__status`")
+            ->execute()
+            ->as_array();
+    }
+
+    public function findAllSaleTypes()
+    {
+        return DB::query(Database::SELECT, "SELECT * FROM `sales__type`")
+            ->execute()
+            ->as_array();
+    }
+
+    public function addCustomerSale($params = [])
+    {
+        $res = DB::query(Database::INSERT, 'INSERT INTO `customers__sales_list`
+                (`manager_id`, `customer_id`, `method`, `reserve`, `type`, `delivery`, `date`)
+            VALUES (:manager_id, :customer_id, :method, :reserve, :type, :delivery, now())')
+            ->param(':manager_id', $this->user_id)
+            ->param(':customer_id', Arr::get($params, 'customer_id'))
+            ->param(':method', Arr::get($params, 'newSaleMethod'))
+            ->param(':reserve', Arr::get($params, 'newSaleReserve'))
+            ->param(':type', Arr::get($params, 'newSaleType'))
+            ->param(':delivery', Arr::get($params, 'newSaleDelivery'))
+            ->execute();
+
+        $saleId = Arr::get($res, 0);
+
+        foreach (Arr::get($params, 'newSaleProductCode', []) as $key => $code) {
+            if (empty($code)) {
+                continue;
+            }
+
+            DB::query(Database::INSERT, 'INSERT INTO `customers__sales_products`
+                (`customer_id`, `sale_id`, `product_code`, `product_name`, `date`)
+            VALUES (:customer_id, :sale_id, :product_code, :product_name, now())')
+                ->param(':customer_id', Arr::get($params, 'customer_id'))
+                ->param(':sale_id', $saleId)
+                ->param(':product_code', $code)
+                ->param(':product_name', $params['newSaleProductName'][$key])
+                ->execute();
+        }
     }
 }
 ?>

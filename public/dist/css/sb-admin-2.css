@@ -368,11 +368,21 @@ table.dataTable thead .sorting:after {
     vertical-align: middle !important;
 }
 
-#addProductModal .form-group .form-control {
+#addProductModal .form-group .form-control,
+#addSaleModal .form-group .form-control {
     display: inline-block;
 }
 
 @media (min-width: 1200px) {
+    .col-lg-12-important {
+        width: 100% !important;
+    }
+    .col-lg-11-important {
+        width: 91.66666667% !important;
+    }
+    .col-lg-10-important {
+        width: 83.33333333% !important;
+    }
     .col-lg-9-important {
         width: 75% !important;
     }
