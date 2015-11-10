@@ -149,7 +149,15 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
+                                <?foreach ($customerSales as $sale) {?>
+                                    <tr>
+                                        <td class="text-center"><?=$sale['manager_name'];?></td>
+                                        <td><?=$sale['products'];?></td>
+                                        <td class="text-center"><?=$sale['reserve_name'];?></td>
+                                        <td class="text-center"><?=$sale['method_name'];?></td>
+                                        <td class="text-center"><?=$sale['delivery_name'];?></td>
+                                    </tr>
+                                <?}?>
                                 </tbody>
                             </table>
                         </div>
@@ -354,9 +362,43 @@
                                 <input type="hidden" id="newSaleProductCode1" name="newSaleProductCode[]">
                                 <input class="col-lg-12-important form-control newSaleProductName"
                                        id="newSaleProductName1" data-row="1" name="newSaleProductName[]"
-                                       onkeypress="initTypeahead($(this));"  onchange="initChange($(this));"
                                        placeholder="Название товара" autocomplete="off">
                             </p>
+                            <script>
+                                $('#newSaleProductName1').typeahead({
+                                    source: function (item, process) {
+                                        return $.get('/crm/ajax/find_product_by_item', {
+                                            item: item
+                                        }, function (response) {
+                                            var data = [];
+                                            var parseResponse = JSON.parse(response);
+
+                                            for (var i in parseResponse) {
+                                                data.push(parseResponse[i].item_id + '#' + parseResponse[i].full_size + ' ' + parseResponse[i].model);
+                                            }
+
+                                            return process(data);
+                                        });
+                                    },
+                                    highlighter: function (item) {
+                                        var parts = item.split('#');
+                                        var html = '<div class="typeahead">' +
+                                            '<div class="pull-left margin-small">' +
+                                            '<div class="text-left"><strong>' + parts[0] + '#' + parts[1] + '</strong></div>' +
+                                            '</div>' +
+                                            '<div class="clearfix"></div>' +
+                                            '</div>';
+
+                                        return html;
+                                    },
+                                    updater: function (item) {
+                                        var parts = item.split('#');
+                                        $('#newSaleProductCode1').val(parts[0]);
+
+                                        return parts[1];
+                                    }
+                                });
+                            </script>
                         </p>
                         <p>
                             <button class="btn btn-success" type="button" id="addSaleProductRow">Добавить строку  <i class="fa fa-indent fa-fw"></i></button>

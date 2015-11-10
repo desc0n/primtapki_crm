@@ -507,5 +507,38 @@ class Model_Admin extends Kohana_Model
                 ->execute();
         }
     }
+
+    public function findAllCustomersSales($params = [])
+    {
+        $where = '';
+
+        if (Arr::get($params, 'customer_id') !== null) {
+            $where .= sprintf('AND `csl`.`customer_id` = %s', preg_replace('/[^0-9]+/i', '', Arr::get($params, 'customer_id')));
+        }
+
+        return DB::query(Database::SELECT, "
+            SELECT `csl`.*,
+            `up`.`name` as `manager_name`,
+            (
+                SELECT GROUP_CONCAT(`csp`.`product_name` SEPARATOR '<br>')
+                FROM `customers__sales_products` `csp`
+                WHERE `csp`.`sale_id` = `csl`.`id`
+            ) as `products`,
+            `sp`.`name` as `reserve_name`,
+            `sm`.`name` as `method_name`,
+            `sd`.`name` as `delivery_name`
+            FROM `customers__sales_list` `csl`
+            INNER JOIN `users__profile` `up`
+                ON `up`.`user_id` = `csl`.`manager_id`
+            INNER JOIN `sales__reserve` `sp`
+                ON `sp`.`id` = `csl`.`reserve`
+            INNER JOIN `sales__method` `sm`
+                ON `sm`.`id` = `csl`.`method`
+            INNER JOIN `sales__delivery` `sd`
+                ON `sd`.`id` = `csl`.`delivery`
+            WHERE 1 $where")
+            ->execute()
+            ->as_array();
+    }
 }
 ?>

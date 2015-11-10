@@ -177,42 +177,7 @@ $(function() {
     $('#dataTables-sales').dataTable();
 
 
-    $('.newSaleProductCode').typeahead({
-        source: function (item, process) {
-            return $.get('/crm/ajax/find_product_by_item', {
-                item: item
-            }, function (response) {
-                var data = [];
-                var parseResponse = JSON.parse(response);
 
-                for (var i in parseResponse) {
-                    data.push(parseResponse[i].item_id + '#' + parseResponse[i].full_size + ' ' + parseResponse[i].model);
-                }
-
-                return process(data);
-            });
-        },
-        highlighter: function (item) {
-            var parts = item.split('#');
-            var html = '<div class="typeahead">' +
-                '<div class="pull-left margin-small">' +
-                '<div class="text-left"><strong>' + parts[0] + '</strong></div>' +
-                '</div>' +
-                '<div class="clearfix"></div>' +
-                '</div>';
-
-            return html;
-        },
-        updater: function (item) {
-            var parts = item.split('#');
-            var rowId = $(this).data('row');
-            console.log(rowId);
-
-            $('#newSaleProductName' + rowId).val(parts[1]);
-
-            return parts[0];
-        }
-    });
 
     $('#addSaleProductRow').click(function(){
         var rowCount = $('.newSaleProductRow').length;
@@ -221,9 +186,40 @@ $(function() {
         var html = '<p id="row-' + newRowCount + '" class="newSaleProductRow">' +
             '<input type="hidden" id="newSaleProductCode' + newRowCount + '" name="newSaleProductCode[]">' +
             '<input class="col-lg-12-important form-control newSaleProductName" id="newSaleProductName' + newRowCount + '"' +
-            'onkeypress="initTypeahead($(this));" onchange="initChange($(this));" data-row="' + newRowCount + '"' +
+            'data-row="' + newRowCount + '"' +
             'name="newSaleProductName[]" placeholder="Название товара" autocomplete="off">' +
-            '</p>';
+            '</p>' +
+            '<script>' +
+            '$("#newSaleProductName' + newRowCount +'").typeahead({' +
+                'source: function (item, process) {' +
+                    'return $.get("/crm/ajax/find_product_by_item", {' +
+                        'item: item' +
+                    '}, function (response) {' +
+                        'var data = [];' +
+                        'var parseResponse = JSON.parse(response);' +
+                        'for (var i in parseResponse) {' +
+                            'data.push(parseResponse[i].item_id + "#" + parseResponse[i].full_size + " " + parseResponse[i].model);' +
+                        '}' +
+                        'return process(data);' +
+                    '});' +
+                '},' +
+                'highlighter: function (item) {' +
+                    'var parts = item.split("#");' +
+                    'var html = "<div class=\'typeahead\'>" +' +
+                        '"<div class=\'pull-left margin-small\'>" +' +
+                        '"<div class=\'text-left\'><strong>" + parts[0] + "#" + parts[1] + "</strong></div>" +' +
+                        '"</div>" +' +
+                        '"<div class=\'clearfix\'></div>" +' +
+                        '"</div>";' +
+                    'return html;' +
+                '},' +
+                'updater: function (item) {' +
+                    'var parts = item.split("#");' +
+                    '$("#newSaleProductCode' + newRowCount +'").val(parts[0]);' +
+                    'return parts[1];' +
+                '}' +
+            '});' +
+        '</script>';
 
         $('#newSaleProductList').append(html);
     });

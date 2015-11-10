@@ -17,8 +17,8 @@ class Controller_Customer extends Controller
         $adminModel = Model::factory('Admin');
 
         if (Arr::get($_POST, 'name') !== null && Arr::get($_POST, 'phone') !== null) {
-            $adminModel->addCustomer($_POST);
-            HTTP::redirect('/customer/list');
+            $customerId = $adminModel->addCustomer($_POST);
+            HTTP::redirect(sprintf('/customer/info/%d', $customerId));
         }
 
 		$template = $this->getBaseTemplate();
@@ -75,6 +75,7 @@ class Controller_Customer extends Controller
             ->set('customerData', $adminModel->findCustomer($id))
             ->set('customerActions', $adminModel->findActionBy(['customer_id' => $id]))
             ->set('customerProducts', $adminModel->findProductBy(['customer_id' => $id]))
+            ->set('customerSales', $adminModel->findAllCustomersSales(['customer_id' => $id]))
             ->set('communicationMethods', $adminModel->findAllCommunicationMethods())
             ->set('saleMethods', $adminModel->findAllSaleMethods())
             ->set('saleTypes', $adminModel->findAllSaleTypes())
